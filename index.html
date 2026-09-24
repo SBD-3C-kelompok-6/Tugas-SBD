@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Portofolio mahasiswa Teknik Informatika.">
+	<title>Portofolio | Wildan Kurniawan</title>
+	<style>
+		:root {
+			--ink: #152331;
+			--muted: #617080;
+			--paper: #f7faf8;
+			--white: #ffffff;
+			--line: #dce7e3;
+			--teal: #087f76;
+			--teal-dark: #075c58;
+			--mint: #d9f1e9;
+			--coral: #d5735d;
+			--shadow: 0 18px 45px rgba(21, 35, 49, 0.10);
+		}
+
+		* { box-sizing: border-box; margin: 0; padding: 0; }
+		html { scroll-behavior: smooth; }
+		body {
+			background: var(--paper);
+			color: var(--ink);
+			font-family: Georgia, 'Times New Roman', serif;
+			line-height: 1.6;
+		}
+		a { color: inherit; text-decoration: none; }
+		button, input, textarea { font: inherit; }
+		.container { margin: 0 auto; max-width: 1120px; padding: 0 28px; }
+
+		header {
+			background: rgba(247, 250, 248, 0.90);
+			border-bottom: 1px solid rgba(220, 231, 227, 0.75);
+			position: sticky;
+			top: 0;
+			z-index: 10;
+			backdrop-filter: blur(14px);
+		}
+		.nav { align-items: center; display: flex; justify-content: space-between; min-height: 76px; }
+		.brand { color: var(--teal-dark); font-size: 1.25rem; font-weight: 700; letter-spacing: .04em; }
+		.brand span { color: var(--coral); }
+		.nav-links { display: flex; gap: 28px; list-style: none; }
+		.nav-links a { color: var(--muted); font-family: Arial, sans-serif; font-size: .86rem; font-weight: 700; transition: color .25s ease; }
+		.nav-links a:hover { color: var(--coral); }
+
+		.hero { min-height: 640px; overflow: hidden; padding: 112px 0 88px; position: relative; }
+		.hero::before { background: var(--mint); border-radius: 50%; content: ''; height: 520px; opacity: .65; position: absolute; right: -170px; top: -200px; width: 520px; }
+		.hero-grid { align-items: center; display: grid; gap: 80px; grid-template-columns: 1.15fr .85fr; position: relative; }
+		.eyebrow { color: var(--coral); font-family: Arial, sans-serif; font-size: .77rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+		h1 { font-size: clamp(3.4rem, 7vw, 6.7rem); font-weight: 500; letter-spacing: -.05em; line-height: .94; margin: 20px 0 26px; max-width: 680px; }
+		h1 em { color: var(--teal); font-style: normal; }
+		.hero-copy { color: var(--muted); font-family: Arial, sans-serif; font-size: 1.06rem; max-width: 520px; }
+		.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+		.button { border: 1px solid var(--teal); border-radius: 4px; cursor: pointer; display: inline-flex; font-family: Arial, sans-serif; font-size: .88rem; font-weight: 700; padding: 13px 21px; transition: background .25s ease, color .25s ease, transform .25s ease; }
+		.button:hover { transform: translateY(-3px); }
+		.button.primary { background: var(--teal); color: var(--white); }
+		.button.primary:hover { background: var(--teal-dark); }
+		.button.ghost { color: var(--teal-dark); }
+		.button.ghost:hover { background: var(--mint); }
+		.portrait-wrap { justify-self: center; position: relative; }
+		.portrait { align-items: center; background: var(--teal); border: 12px solid var(--white); border-radius: 50%; box-shadow: var(--shadow); color: var(--white); display: flex; height: 310px; justify-content: center; overflow: hidden; position: relative; width: 310px; }
+		.portrait::before { border: 2px solid rgba(255,255,255,.35); border-radius: 50%; content: ''; height: 210px; position: absolute; width: 210px; }
+		.avatar { font-size: 6rem; font-weight: 700; position: relative; }
+		.portrait-tag { background: var(--coral); bottom: -4px; color: var(--white); font-family: Arial, sans-serif; font-size: .75rem; font-weight: 700; left: -28px; padding: 10px 17px; position: absolute; transform: rotate(-5deg); }
+
+		section { padding: 104px 0; }
+		.section-heading { align-items: end; display: flex; justify-content: space-between; margin-bottom: 42px; }
+		.section-heading h2 { font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 500; letter-spacing: -.04em; line-height: 1; }
+		.section-heading p { color: var(--muted); font-family: Arial, sans-serif; font-size: .9rem; max-width: 300px; }
+		.about { background: var(--white); }
+		.about-grid { display: grid; gap: 70px; grid-template-columns: .9fr 1.1fr; }
+		.about-lead { color: var(--teal-dark); font-size: 1.75rem; line-height: 1.3; }
+		.about-text { color: var(--muted); font-family: Arial, sans-serif; font-size: .98rem; }
+		.about-text + .about-text { margin-top: 18px; }
+		.facts { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); margin-top: 34px; }
+		.fact { border-left: 2px solid var(--coral); padding-left: 14px; }
+		.fact strong { display: block; font-size: 1.55rem; }
+		.fact span { color: var(--muted); font-family: Arial, sans-serif; font-size: .78rem; }
+
+		.skills-grid { display: grid; gap: 16px; grid-template-columns: repeat(4, 1fr); }
+		.skill { background: var(--white); border: 1px solid var(--line); padding: 25px 20px; transition: box-shadow .25s ease, transform .25s ease; }
+		.skill:hover, .project:hover { box-shadow: var(--shadow); transform: translateY(-7px); }
+		.skill-icon { color: var(--coral); font-family: Arial, sans-serif; font-size: 1.5rem; font-weight: 800; }
+		.skill h3 { font-size: 1.2rem; margin: 14px 0 6px; }
+		.skill p { color: var(--muted); font-family: Arial, sans-serif; font-size: .82rem; }
+
+		.projects { background: #eaf4f0; }
+		.project-grid { display: grid; gap: 22px; grid-template-columns: repeat(3, 1fr); }
+		.project { background: var(--white); border: 1px solid var(--line); display: flex; flex-direction: column; min-height: 330px; padding: 25px; transition: box-shadow .25s ease, transform .25s ease; }
+		.project-number { color: var(--coral); font-family: Arial, sans-serif; font-size: .76rem; font-weight: 800; letter-spacing: .12em; }
+		.project h3 { font-size: 1.5rem; font-weight: 500; line-height: 1.15; margin: 48px 0 14px; }
+		.project p { color: var(--muted); font-family: Arial, sans-serif; font-size: .87rem; }
+		.tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto; padding-top: 24px; }
+		.tag { background: var(--mint); color: var(--teal-dark); font-family: Arial, sans-serif; font-size: .72rem; padding: 6px 9px; }
+
+		.contact { background: var(--teal-dark); color: var(--white); }
+		.contact .section-heading p { color: #bcd8d0; }
+		.contact-grid { display: grid; gap: 70px; grid-template-columns: .8fr 1.2fr; }
+		.contact-copy { color: #bcd8d0; font-family: Arial, sans-serif; max-width: 360px; }
+		.socials { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 28px; }
+		.socials a { border-bottom: 1px solid #80b9ad; color: var(--white); font-family: Arial, sans-serif; font-size: .86rem; padding-bottom: 3px; }
+		.contact-form { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+		.contact-form label { color: #bcd8d0; font-family: Arial, sans-serif; font-size: .76rem; }
+		.contact-form input, .contact-form textarea { background: transparent; border: 0; border-bottom: 1px solid #5d958b; color: var(--white); display: block; margin-top: 6px; outline: 0; padding: 10px 0; width: 100%; }
+		.contact-form input:focus, .contact-form textarea:focus { border-color: var(--coral); }
+		.contact-form textarea { min-height: 80px; resize: vertical; }
+		.form-wide { grid-column: 1 / -1; }
+		.contact-form .button { background: var(--coral); border-color: var(--coral); color: var(--white); justify-self: start; margin-top: 8px; }
+		footer { background: var(--teal-dark); border-top: 1px solid #35766d; color: #bcd8d0; font-family: Arial, sans-serif; font-size: .75rem; padding: 22px 0; }
+
+		@media (max-width: 800px) {
+			.nav { align-items: flex-start; flex-direction: column; gap: 12px; padding: 18px 28px; }
+			.nav-links { gap: 16px; flex-wrap: wrap; }
+			.hero { padding-top: 78px; }
+			.hero-grid, .about-grid, .contact-grid { gap: 44px; grid-template-columns: 1fr; }
+			.portrait-wrap { margin-top: 10px; }
+			.skills-grid { grid-template-columns: repeat(2, 1fr); }
+			.project-grid { grid-template-columns: 1fr; }
+		}
+		@media (max-width: 480px) {
+			.container { padding: 0 20px; }
+			section { padding: 76px 0; }
+			.nav { padding-left: 20px; padding-right: 20px; }
+			.nav-links { gap: 11px; }
+			.nav-links a { font-size: .74rem; }
+			h1 { font-size: 3.5rem; }
+			.portrait { height: 250px; width: 250px; }
+			.skills-grid, .facts, .contact-form { grid-template-columns: 1fr; }
+			.form-wide { grid-column: auto; }
+			.section-heading { align-items: flex-start; flex-direction: column; gap: 16px; }
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<nav class="container nav" aria-label="Navigasi utama">
+			<a class="brand" href="#beranda">AP<span>.</span></a>
+			<ul class="nav-links">
+				<li><a href="#tentang">Tentang</a></li>
+				<li><a href="#keahlian">Keahlian</a></li>
+				<li><a href="#proyek">Proyek</a></li>
+				<li><a href="#kontak">Kontak</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<main>
+		<section class="hero" id="beranda">
+			<div class="container hero-grid">
+				<div>
+					<p class="eyebrow">Portofolio Mahasiswa · 2025</p>
+					<h1>Halo, saya <em>Wildan Kurniawan.</em></h1>
+					<p class="hero-copy">Mahasiswa Teknik Informatika yang senang mengubah data, ide, dan baris kode menjadi solusi digital yang berguna untuk masa depan.</p>
+					<div class="hero-actions">
+						<a class="button primary" href="#proyek">Lihat proyek</a>
+						<a class="button ghost" href="#kontak">Hubungi saya</a>
+					</div>
+				</div>
+				<div class="portrait-wrap">
+					<div class="portrait" role="img" aria-label="Placeholder avatar Wildan Kurniawan"><span class="avatar">AP</span></div>
+					<div class="portrait-tag">IT / DATABASE</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="about" id="tentang">
+			<div class="container">
+				<div class="section-heading"><h2>Tentang saya</h2><p>Sedikit cerita tentang perjalanan dan cara saya berkarya.</p></div>
+				<div class="about-grid">
+					<p class="about-lead">Membangun fondasi digital yang rapi, terstruktur, dan mudah dipahami.</p>
+					<div>
+						<p class="about-text">Saya Wildan Kurniawan, mahasiswa yang sedang mendalami ilmu komputer dan pengembangan web. Bagi saya, proyek kuliah adalah ruang untuk berlatih memecahkan masalah nyata dengan pendekatan yang terukur.</p>
+						<p class="about-text">Di luar kelas, saya sering eksplorasi secara sederhana dan belajar tools baru yang membantu proses kerja tim.</p>
+						<div class="facts"><div class="fact"><strong>08</strong><span>Proyek selesai</span></div><div class="fact"><strong>04</strong><span>Teknologi utama</span></div><div class="fact"><strong>3.7</strong><span>IPK terakhir</span></div></div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="keahlian">
+			<div class="container">
+				<div class="section-heading"><h2>Keahlian</h2><p>Perangkat yang saya gunakan untuk belajar dan membuat.</p></div>
+				<div class="skills-grid">
+					<article class="skill"><div class="skill-icon">&lt;/&gt;</div><h3>HTML / CSS</h3><p>Menyusun halaman web semantik, responsif, dan enak dipandang.</p></article>
+					<article class="skill"><div class="skill-icon">⌘</div><h3>Git & GitHub</h3><p>Kolaborasi kode, version control, dan dokumentasi proyek.</p></article>
+					<article class="skill"><div class="skill-icon">DB</div><h3>Database / SQL</h3><p>Merancang tabel, relasi, query, dan pengelolaan data.</p></article>
+					<article class="skill"><div class="skill-icon">Py</div><h3>Python</h3><p>Logika pemrograman, otomasi sederhana, dan analisis data.</p></article>
+				</div>
+			</div>
+		</section>
+
+		<section class="projects" id="proyek">
+			<div class="container">
+				<div class="section-heading"><h2>Proyek pilihan</h2><p>Beberapa tugas kuliah yang menjadi ruang eksperimen saya.</p></div>
+				<div class="project-grid">
+					<article class="project"><span class="project-number">01 / DATABASE</span><h3>Sistem Informasi Perpustakaan</h3><p>Perancangan database untuk mengelola anggota, koleksi buku, dan transaksi peminjaman secara terstruktur.</p><div class="tags"><span class="tag">MySQL</span><span class="tag">ERD</span><span class="tag">SQL</span></div></article>
+					<article class="project"><span class="project-number">02 / WEB DESIGN</span><h3>Dashboard Data Kelas</h3><p>Dashboard sederhana untuk menampilkan rekap kehadiran dan nilai dengan fokus pada keterbacaan informasi.</p><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Chart</span></div></article>
+					<article class="project"><span class="project-number">03 / PYTHON</span><h3>Analisis Data Mahasiswa</h3><p>Eksplorasi data akademik menggunakan Python untuk menemukan pola dan membuat ringkasan yang informatif.</p><div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Jupyter</span></div></article>
+				</div>
+			</div>
+		</section>
+
+		<section class="contact" id="kontak">
+			<div class="container">
+				<div class="section-heading"><h2>Mari terhubung</h2><p>Punya ide proyek atau ingin berdiskusi? Kirim pesan.</p></div>
+				<div class="contact-grid">
+					<div><p class="contact-copy">Saya terbuka untuk kolaborasi tugas, diskusi teknologi, dan kesempatan belajar baru.</p><div class="socials"><a href="mailto:wildan.kurniawan@email.com">Email</a><a href="https://github.com" target="_blank" rel="noopener">GitHub</a><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></div></div>
+					<form class="contact-form" action="mailto:wildan.kurniawan@email.com" method="post" enctype="text/plain">
+						<label>Nama<input type="text" name="nama" placeholder="Nama kamu" required></label>
+						<label>Email<input type="email" name="email" placeholder="email@contoh.com" required></label>
+						<label class="form-wide">Pesan<textarea name="pesan" placeholder="Tulis pesan singkat..." required></textarea></label>
+						<button class="button" type="submit">Kirim pesan →</button>
+					</form>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer><div class="container">© 2025 Wildan Kurniawan · Dibuat dengan rasa ingin tahu.</div></footer>
+</body>
+</html>
